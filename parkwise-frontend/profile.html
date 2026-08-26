@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Profile</title>
+
+    <link rel="stylesheet" href="profile.css">
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+    <div class="background">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+
+    <!-- Main Container -->
+    <main class="profile-container">
+
+        <!-- Profile Card -->
+        <section class="profile-card">
+
+            <div class="profile-header">
+
+                <div class="profile-avatar" id="profileAvatar">
+                    U
+                </div>
+
+                <div>
+                    <h1 id="profileName">
+                        User
+                    </h1>
+
+                    <p id="profileEmail">
+                        user@email.com
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="profile-divider"></div>
+
+
+            <!-- Account Information -->
+            <div class="section">
+
+                <h2>Account Information</h2>
+
+                <div class="info-box">
+
+                    <div class="info-item">
+                        <span>Full Name</span>
+                        <strong id="fullName">
+                            User
+                        </strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Email Address</span>
+                        <strong id="emailAddress">
+                            user@email.com
+                        </strong>
+                    </div>
+
+                    <div class="info-item">
+                        <span>Account Status</span>
+                        <strong class="status">
+                            Active
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- Actions -->
+            <div class="actions">
+
+                <button
+                    class="back-button"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    ← Back to Dashboard
+                </button>
+
+                <button
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="profile.js"></script>
+
+</body>
+
+</html>

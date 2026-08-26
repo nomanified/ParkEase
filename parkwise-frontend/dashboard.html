@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Dashboard</title>
+
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="brand">
+
+            <div class="brand-icon">
+                P
+            </div>
+
+            <span>
+                ParkEase
+            </span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="#" class="active">
+                🏠 Dashboard
+            </a>
+
+            <a href="#">
+                🅿️ Parking Spots
+            </a>
+
+            <a href="#">
+                📅 My Bookings
+            </a>
+
+            <a href="profile.html">
+                👤 Profile
+            </a>
+
+        </nav>
+
+
+        <button
+            id="logoutButton"
+            class="logout"
+        >
+            Logout
+        </button>
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Dashboard
+                </h1>
+
+                <p>
+                    Find and manage your parking easily.
+                </p>
+
+            </div>
+
+
+            <div class="user-box">
+
+                <div class="user-avatar">
+                    U
+                </div>
+
+                <div>
+
+                    <strong id="userName">
+                        User
+                    </strong>
+
+                    <small id="userEmail">
+                        user@email.com
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =========================
+             WELCOME CARD
+        ========================== -->
+
+        <section class="welcome-card">
+
+            <div>
+
+                <span>
+                    Welcome back 👋
+                </span>
+
+                <h2 id="welcomeName">
+                    Find Your Parking Spot
+                </h2>
+
+                <p>
+                    Search available parking spaces
+                    near your location.
+                </p>
+
+            </div>
+
+
+            <div class="parking-icon">
+                🅿️
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             SEARCH
+        ========================== -->
+
+        <section class="search-section">
+
+            <h2>
+                Find Parking
+            </h2>
+
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="parkingSearch"
+                    placeholder="Search parking location..."
+                >
+
+
+                <button
+                    type="button"
+                    id="searchButton"
+                >
+                    Search
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             PARKING FILTERS
+        ========================== -->
+
+        <section class="filter-section">
+
+            <h2>
+                Filter Parking
+            </h2>
+
+
+            <div class="filter-box">
+
+
+                <!-- PARKING TYPE -->
+
+                <div class="filter-item">
+
+                    <label for="parkingTypeFilter">
+                        Parking Type
+                    </label>
+
+                    <select id="parkingTypeFilter">
+
+                        <option value="all">
+                            All Types
+                        </option>
+
+                        <option value="Indoor">
+                            Indoor
+                        </option>
+
+                        <option value="Outdoor">
+                            Outdoor
+                        </option>
+
+                        <option value="Basement">
+                            Basement
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- STATUS -->
+
+                <div class="filter-item">
+
+                    <label for="parkingStatusFilter">
+                        Status
+                    </label>
+
+                    <select id="parkingStatusFilter">
+
+                        <option value="all">
+                            All Status
+                        </option>
+
+                        <option value="Available">
+                            Available
+                        </option>
+
+                        <option value="Occupied">
+                            Occupied
+                        </option>
+
+                        <option value="Reserved">
+                            Reserved
+                        </option>
+
+                        <option value="Maintenance">
+                            Maintenance
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- PRICE -->
+
+                <div class="filter-item">
+
+                    <label for="parkingPriceFilter">
+                        Sort By Price
+                    </label>
+
+                    <select id="parkingPriceFilter">
+
+                        <option value="default">
+                            Default
+                        </option>
+
+                        <option value="low">
+                            Low to High
+                        </option>
+
+                        <option value="high">
+                            High to Low
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- CLEAR -->
+
+                <button
+                    type="button"
+                    id="clearFilters"
+                    class="clear-filter-button"
+                >
+                    Clear Filters
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             AVAILABLE PARKING
+        ========================== -->
+
+        <section class="parking-section">
+
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>
+                        Available Parking
+                    </h2>
+
+                    <p>
+                        Choose a parking spot below.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PARKING CARDS -->
+
+            <div class="parking-grid">
+
+                <div class="parking-card">
+
+                    <h3>
+                        Loading parking spots...
+                    </h3>
+
+                    <p>
+                        Please wait.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         DASHBOARD JAVASCRIPT
+    ========================== -->
+
+    <script src="dashboard.js"></script>
+
+</body>
+
+</html>

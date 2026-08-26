@@ -19,6 +19,7 @@ body {
     position: fixed;
     inset: 0;
     overflow: hidden;
+
     background:
         radial-gradient(circle at top left, #123b70, transparent 35%),
         radial-gradient(circle at bottom right, #075b68, transparent 35%),
@@ -34,43 +35,42 @@ body {
 }
 
 .circle-1 {
-    width: 300px;
-    height: 300px;
+    width: 240px;
+    height: 240px;
     background: #2563eb;
-    top: -100px;
-    left: -80px;
+    top: -80px;
+    left: -70px;
 }
 
 .circle-2 {
-    width: 250px;
-    height: 250px;
+    width: 200px;
+    height: 200px;
     background: #06b6d4;
-    right: -70px;
-    bottom: -80px;
+    right: -60px;
+    bottom: -70px;
     animation-delay: 2s;
 }
 
 .circle-3 {
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     background: #7c3aed;
-    right: 20%;
+    right: 18%;
     top: 15%;
     animation-delay: 4s;
 }
 
 @keyframes moveCircle {
-
     0% {
         transform: translate(0, 0) scale(1);
     }
 
     50% {
-        transform: translate(60px, 40px) scale(1.15);
+        transform: translate(40px, 30px) scale(1.1);
     }
 
     100% {
-        transform: translate(-40px, 70px) scale(0.9);
+        transform: translate(-30px, 50px) scale(0.9);
     }
 }
 
@@ -80,42 +80,45 @@ body {
 
 .container {
     min-height: 100vh;
+
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px;
+
+    padding: 10px;
+
     position: relative;
     z-index: 2;
 }
 
 /* =========================
-   REGISTER CARD
+   SMALLER REGISTER CARD
 ========================= */
 
 .register-card {
     width: 100%;
-    max-width: 440px;
-    padding: 42px;
+    max-width: 390px;
+
+    padding: 27px 30px;
 
     background: rgba(255, 255, 255, 0.09);
 
     border: 1px solid rgba(255, 255, 255, 0.18);
 
-    border-radius: 24px;
+    border-radius: 20px;
 
     backdrop-filter: blur(25px);
 
     box-shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45);
+        0 25px 60px rgba(0, 0, 0, 0.4);
 
     animation: cardEnter 0.8s ease forwards;
 }
 
 @keyframes cardEnter {
-
     from {
         opacity: 0;
-        transform: translateY(50px) scale(0.92);
+        transform: translateY(35px) scale(0.95);
     }
 
     to {
@@ -132,25 +135,26 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
 
-    margin-bottom: 25px;
+    gap: 8px;
+
+    margin-bottom: 17px;
 
     color: white;
 
-    font-size: 25px;
+    font-size: 22px;
     font-weight: bold;
 }
 
 .logo-icon {
-    width: 42px;
-    height: 42px;
+    width: 37px;
+    height: 37px;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    border-radius: 12px;
+    border-radius: 10px;
 
     background: linear-gradient(
         135deg,
@@ -158,20 +162,20 @@ body {
         #06b6d4
     );
 
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+    box-shadow:
+        0 7px 20px rgba(37, 99, 235, 0.4);
 
     animation: logoPulse 2s infinite ease-in-out;
 }
 
 @keyframes logoPulse {
-
     0%,
     100% {
         transform: scale(1);
     }
 
     50% {
-        transform: scale(1.08);
+        transform: scale(1.06);
     }
 }
 
@@ -184,9 +188,9 @@ body {
 
     color: white;
 
-    font-size: 32px;
+    font-size: 27px;
 
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .subtitle {
@@ -194,11 +198,11 @@ body {
 
     color: #b8c4d4;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    line-height: 1.6;
+    line-height: 1.5;
 
-    margin-bottom: 30px;
+    margin-bottom: 21px;
 }
 
 /* =========================
@@ -206,7 +210,7 @@ body {
 ========================= */
 
 .input-box {
-    margin-bottom: 19px;
+    margin-bottom: 13px;
 }
 
 .input-box label {
@@ -214,27 +218,27 @@ body {
 
     color: #e5e7eb;
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 600;
 
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .input-box input {
     width: 100%;
 
-    padding: 14px 15px;
+    padding: 11px 13px;
 
     border: 1px solid rgba(255, 255, 255, 0.15);
 
-    border-radius: 11px;
+    border-radius: 10px;
 
     background: rgba(255, 255, 255, 0.08);
 
     color: white;
 
-    font-size: 15px;
+    font-size: 14px;
 
     transition: all 0.3s ease;
 }
@@ -253,7 +257,7 @@ body {
     box-shadow:
         0 0 0 3px rgba(56, 189, 248, 0.12);
 
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 /* =========================
@@ -263,11 +267,11 @@ body {
 #registerButton {
     width: 100%;
 
-    padding: 14px;
+    padding: 12px;
 
     border: none;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
     background: linear-gradient(
         135deg,
@@ -277,7 +281,7 @@ body {
 
     color: white;
 
-    font-size: 16px;
+    font-size: 15px;
 
     font-weight: bold;
 
@@ -286,19 +290,17 @@ body {
     transition: all 0.3s ease;
 
     position: relative;
-
-    overflow: hidden;
 }
 
 #registerButton:hover {
-    transform: translateY(-3px);
+    transform: translateY(-2px);
 
     box-shadow:
-        0 12px 30px rgba(37, 99, 235, 0.35);
+        0 10px 25px rgba(37, 99, 235, 0.35);
 }
 
 #registerButton:active {
-    transform: scale(0.97);
+    transform: scale(0.98);
 }
 
 /* =========================
@@ -306,15 +308,15 @@ body {
 ========================= */
 
 #message {
-    min-height: 22px;
+    min-height: 18px;
 
     text-align: center;
 
-    margin-top: 15px;
+    margin-top: 9px;
 
     color: white;
 
-    font-size: 14px;
+    font-size: 13px;
 }
 
 /* =========================
@@ -322,13 +324,13 @@ body {
 ========================= */
 
 .divider {
-    margin: 22px 0;
+    margin: 15px 0;
 
     text-align: center;
 
     color: #9ca3af;
 
-    font-size: 13px;
+    font-size: 12px;
 }
 
 /* =========================
@@ -338,9 +340,9 @@ body {
 .login-button {
     width: 100%;
 
-    padding: 13px;
+    padding: 11px;
 
-    border-radius: 11px;
+    border-radius: 10px;
 
     border: 1px solid rgba(255, 255, 255, 0.2);
 
@@ -348,7 +350,7 @@ body {
 
     color: white;
 
-    font-size: 15px;
+    font-size: 14px;
 
     cursor: pointer;
 
@@ -368,20 +370,21 @@ body {
 @media (max-width: 500px) {
 
     .register-card {
-        padding: 30px 24px;
+        max-width: 360px;
+        padding: 24px 21px;
     }
 
     .register-card h1 {
-        font-size: 27px;
+        font-size: 25px;
     }
 
     .circle-1 {
-        width: 200px;
-        height: 200px;
+        width: 180px;
+        height: 180px;
     }
 
     .circle-2 {
-        width: 180px;
-        height: 180px;
+        width: 150px;
+        height: 150px;
     }
 }

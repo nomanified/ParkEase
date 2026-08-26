@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Parking Details</title>
+
+    <link rel="stylesheet" href="parking-details.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+
+    <main class="details-container">
+
+        <section class="details-card">
+
+            <div class="details-header">
+
+                <div>
+                    <span class="label">
+                        PARKING SPOT
+                    </span>
+
+                    <h1 id="location">
+                        Loading...
+                    </h1>
+
+                    <p id="spotNumber">
+                        Spot: Loading...
+                    </p>
+                </div>
+
+                <span id="status" class="status">
+                    Loading...
+                </span>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <div class="details-grid">
+
+                <div class="detail-box">
+                    <span>🅿️ Parking Type</span>
+                    <strong id="parkingType">
+                        Loading...
+                    </strong>
+                </div>
+
+
+                <div class="detail-box">
+                    <span>💰 Price Per Hour</span>
+                    <strong id="price">
+                        Loading...
+                    </strong>
+                </div>
+
+
+                <div class="detail-box">
+                    <span>🕐 Available Time</span>
+                    <strong id="availableTime">
+                        Loading...
+                    </strong>
+                </div>
+
+
+                <div class="detail-box">
+                    <span>📍 Location</span>
+                    <strong id="location2">
+                        Loading...
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="description-box">
+
+                <h2>
+                    Parking Instructions
+                </h2>
+
+                <p id="instructions">
+                    Loading...
+                </p>
+
+            </div>
+
+
+            <div class="description-box">
+
+                <h2>
+                    Description
+                </h2>
+
+                <p id="description">
+                    Loading...
+                </p>
+
+            </div>
+
+
+            <div class="actions">
+
+                <button
+                    class="back-button"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    ← Back to Dashboard
+                </button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="parking-details.js"></script>
+
+</body>
+
+</html>
