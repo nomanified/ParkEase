@@ -12,20 +12,36 @@
 
 <body>
 
+    <!-- =========================
+         ANIMATED BACKGROUND
+    ========================== -->
+
     <div class="background">
+
         <div class="circle circle-1"></div>
         <div class="circle circle-2"></div>
         <div class="circle circle-3"></div>
+
     </div>
 
+
+    <!-- =========================
+         MAIN CONTAINER
+    ========================== -->
 
     <main class="details-container">
 
         <section class="details-card">
 
+
+            <!-- =========================
+                 PARKING HEADER
+            ========================== -->
+
             <div class="details-header">
 
                 <div>
+
                     <span class="label">
                         PARKING SPOT
                     </span>
@@ -37,9 +53,14 @@
                     <p id="spotNumber">
                         Spot: Loading...
                     </p>
+
                 </div>
 
-                <span id="status" class="status">
+
+                <span
+                    id="status"
+                    class="status"
+                >
                     Loading...
                 </span>
 
@@ -49,41 +70,71 @@
             <div class="divider"></div>
 
 
+            <!-- =========================
+                 PARKING DETAILS
+            ========================== -->
+
             <div class="details-grid">
 
+
                 <div class="detail-box">
-                    <span>🅿️ Parking Type</span>
+
+                    <span>
+                        🅿️ Parking Type
+                    </span>
+
                     <strong id="parkingType">
                         Loading...
                     </strong>
+
                 </div>
 
 
                 <div class="detail-box">
-                    <span>💰 Price Per Hour</span>
+
+                    <span>
+                        💰 Price Per Hour
+                    </span>
+
                     <strong id="price">
                         Loading...
                     </strong>
+
                 </div>
 
 
                 <div class="detail-box">
-                    <span>🕐 Available Time</span>
+
+                    <span>
+                        🕐 Available Time
+                    </span>
+
                     <strong id="availableTime">
                         Loading...
                     </strong>
+
                 </div>
 
 
                 <div class="detail-box">
-                    <span>📍 Location</span>
+
+                    <span>
+                        📍 Location
+                    </span>
+
                     <strong id="location2">
                         Loading...
                     </strong>
+
                 </div>
+
 
             </div>
 
+
+            <!-- =========================
+                 PARKING INSTRUCTIONS
+            ========================== -->
 
             <div class="description-box">
 
@@ -98,6 +149,10 @@
             </div>
 
 
+            <!-- =========================
+                 DESCRIPTION
+            ========================== -->
+
             <div class="description-box">
 
                 <h2>
@@ -111,6 +166,141 @@
             </div>
 
 
+            <!-- =========================
+                 BOOKING SECTION
+            ========================== -->
+
+            <div class="booking-section">
+
+                <h2>
+                    Book This Parking Spot
+                </h2>
+
+
+                <div class="booking-form">
+
+
+                    <!-- DATE -->
+
+                    <div class="form-group">
+
+                        <label for="bookingDate">
+                            Select Date
+                        </label>
+
+                        <input
+                            type="date"
+                            id="bookingDate"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- START TIME -->
+
+                    <div class="form-group">
+
+                        <label for="startTime">
+                            Start Time
+                        </label>
+
+                        <input
+                            type="time"
+                            id="startTime"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- DURATION -->
+
+                    <div class="form-group">
+
+                        <label for="duration">
+                            Parking Duration
+                        </label>
+
+                        <select id="duration">
+
+                            <option value="1">
+                                1 Hour
+                            </option>
+
+                            <option value="2">
+                                2 Hours
+                            </option>
+
+                            <option value="3">
+                                3 Hours
+                            </option>
+
+                            <option value="4">
+                                4 Hours
+                            </option>
+
+                            <option value="5">
+                                5 Hours
+                            </option>
+
+                            <option value="6">
+                                6 Hours
+                            </option>
+
+                            <option value="8">
+                                8 Hours
+                            </option>
+
+                            <option value="12">
+                                12 Hours
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- TOTAL PRICE -->
+
+                    <div class="total-price-box">
+
+                        <span>
+                            Total Price
+                        </span>
+
+                        <strong id="totalPrice">
+                            $0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- BOOK BUTTON -->
+
+                    <button
+                        type="button"
+                        id="bookNowButton"
+                        class="book-button"
+                    >
+                        🚗 Book Parking Spot
+                    </button>
+
+
+                    <!-- MESSAGE -->
+
+                    <p id="bookingMessage"></p>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 ACTIONS
+            ========================== -->
+
             <div class="actions">
 
                 <button
@@ -122,10 +312,15 @@
 
             </div>
 
+
         </section>
 
     </main>
 
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
 
     <script src="parking-details.js"></script>
 

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ParkEase | Booking Confirmation</title>
+
+    <link
+        rel="stylesheet"
+        href="booking-confirmation.css"
+    >
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Animated Background -->
+
+    <div class="background">
+
+        <div class="circle circle-1"></div>
+
+        <div class="circle circle-2"></div>
+
+        <div class="circle circle-3"></div>
+
+    </div>
+
+
+    <main class="confirmation-container">
+
+        <section class="confirmation-card">
+
+
+            <!-- SUCCESS -->
+
+            <div class="success-icon">
+                ✓
+            </div>
+
+
+            <h1>
+                Booking Confirmed!
+            </h1>
+
+
+            <p class="subtitle">
+                Your parking spot has been successfully reserved.
+            </p>
+
+
+            <!-- BOOKING ID -->
+
+            <div class="booking-id-box">
+
+                <span>
+                    Booking ID
+                </span>
+
+                <strong id="bookingId">
+                    Loading...
+                </strong>
+
+            </div>
+
+
+            <!-- QR CODE -->
+
+            <div class="qr-section">
+
+                <h2>
+                    QR Code Ticket
+                </h2>
+
+                <div id="qrcode"></div>
+
+                <p>
+                    Show this QR code when you arrive at the parking location.
+                </p>
+
+            </div>
+
+
+            <!-- BOOKING DETAILS -->
+
+            <div class="booking-details">
+
+
+                <div class="detail-item">
+
+                    <span>
+                        🅿️ Parking Spot
+                    </span>
+
+                    <strong id="parkingSpot">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        📍 Location
+                    </span>
+
+                    <strong id="location">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        📅 Date
+                    </span>
+
+                    <strong id="bookingDate">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        🕐 Start Time
+                    </span>
+
+                    <strong id="startTime">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        ⏱️ Duration
+                    </span>
+
+                    <strong id="duration">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span>
+                        💰 Total Price
+                    </span>
+
+                    <strong id="totalPrice">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <button
+                    class="dashboard-button"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    ← Back to Dashboard
+                </button>
+
+
+                <button
+                    class="bookings-button"
+                    onclick="window.location.href='my-bookings.html'"
+                >
+                    View My Bookings
+                </button>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script src="booking-confirmation.js"></script>
+
+</body>
+
+</html>

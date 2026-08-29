@@ -1,0 +1,461 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #07111f;
+    color: white;
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   ANIMATED BACKGROUND
+========================= */
+
+.background {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background:
+        radial-gradient(
+            circle at top left,
+            #123b70,
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at bottom right,
+            #075b68,
+            transparent 35%
+        ),
+        #07111f;
+    z-index: -1;
+}
+
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(8px);
+    opacity: 0.45;
+    animation: moveCircle 8s infinite alternate ease-in-out;
+}
+
+
+.circle-1 {
+    width: 300px;
+    height: 300px;
+    background: #2563eb;
+    top: -100px;
+    left: -80px;
+}
+
+
+.circle-2 {
+    width: 250px;
+    height: 250px;
+    background: #06b6d4;
+    right: -70px;
+    bottom: -80px;
+    animation-delay: 2s;
+}
+
+
+.circle-3 {
+    width: 180px;
+    height: 180px;
+    background: #7c3aed;
+    right: 20%;
+    top: 15%;
+    animation-delay: 4s;
+}
+
+
+@keyframes moveCircle {
+
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    50% {
+        transform: translate(50px, 35px) scale(1.12);
+    }
+
+    100% {
+        transform: translate(-30px, 60px) scale(0.92);
+    }
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.confirmation-container {
+    min-height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px 20px;
+}
+
+
+/* =========================
+   CARD
+========================= */
+
+.confirmation-card {
+    width: 100%;
+    max-width: 650px;
+
+    padding: 38px;
+
+    background: rgba(255, 255, 255, 0.09);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 24px;
+
+    backdrop-filter: blur(25px);
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45);
+
+    text-align: center;
+
+    animation: cardEnter 0.8s ease forwards;
+}
+
+
+@keyframes cardEnter {
+
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   SUCCESS ICON
+========================= */
+
+.success-icon {
+    width: 70px;
+    height: 70px;
+
+    margin: 0 auto 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    font-size: 38px;
+    font-weight: bold;
+
+    box-shadow:
+        0 10px 35px rgba(37, 99, 235, 0.35);
+
+    animation: successPulse 2s infinite;
+}
+
+
+@keyframes successPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.08);
+    }
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
+
+.confirmation-card h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+
+.subtitle {
+    color: #b8c4d4;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+
+/* =========================
+   BOOKING ID
+========================= */
+
+.booking-id-box {
+    padding: 16px;
+
+    margin-bottom: 25px;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+
+    border-radius: 14px;
+}
+
+
+.booking-id-box span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 13px;
+
+    margin-bottom: 7px;
+}
+
+
+.booking-id-box strong {
+    font-size: 20px;
+
+    color: #67e8f9;
+
+    letter-spacing: 1px;
+}
+
+
+/* =========================
+   QR SECTION
+========================= */
+
+.qr-section {
+    padding: 22px;
+
+    margin-bottom: 25px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    border-radius: 18px;
+}
+
+
+.qr-section h2 {
+    font-size: 20px;
+
+    margin-bottom: 18px;
+}
+
+
+#qrcode {
+    width: 170px;
+    height: 170px;
+
+    margin: 0 auto 15px;
+
+    padding: 10px;
+
+    background: white;
+
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#qrcode img {
+    max-width: 150px;
+    max-height: 150px;
+}
+
+
+.qr-section p {
+    color: #aeb9c9;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================
+   BOOKING DETAILS
+========================= */
+
+.booking-details {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 14px;
+
+    text-align: left;
+
+    margin-bottom: 25px;
+}
+
+
+.detail-item {
+    padding: 16px;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 13px;
+
+    transition: 0.3s ease;
+}
+
+
+.detail-item:hover {
+    transform: translateY(-3px);
+
+    background: rgba(255, 255, 255, 0.1);
+}
+
+
+.detail-item span {
+    display: block;
+
+    color: #9ca3af;
+
+    font-size: 12px;
+
+    margin-bottom: 7px;
+}
+
+
+.detail-item strong {
+    color: white;
+
+    font-size: 15px;
+}
+
+
+/* =========================
+   ACTIONS
+========================= */
+
+.actions {
+    display: flex;
+
+    gap: 12px;
+}
+
+
+.actions button {
+    flex: 1;
+
+    padding: 13px 15px;
+
+    border-radius: 11px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s ease;
+}
+
+
+.dashboard-button {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    background: rgba(255, 255, 255, 0.06);
+
+    color: white;
+}
+
+
+.dashboard-button:hover {
+    background: rgba(255, 255, 255, 0.12);
+
+    transform: translateY(-2px);
+}
+
+
+.bookings-button {
+    border: none;
+
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+    );
+
+    color: white;
+}
+
+
+.bookings-button:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 25px rgba(37, 99, 235, 0.3);
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .confirmation-card {
+        padding: 25px 18px;
+    }
+
+
+    .confirmation-card h1 {
+        font-size: 27px;
+    }
+
+
+    .booking-details {
+        grid-template-columns: 1fr;
+    }
+
+
+    .actions {
+        flex-direction: column;
+    }
+
+
+    .circle-1 {
+        width: 200px;
+        height: 200px;
+    }
+
+
+    .circle-2 {
+        width: 170px;
+        height: 170px;
+    }
+}
