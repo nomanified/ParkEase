@@ -28,6 +28,24 @@ function loadBooking() {
         document.getElementById("bookingId").textContent =
             "No Booking Found";
 
+        document.getElementById("parkingSpot").textContent =
+            "N/A";
+
+        document.getElementById("location").textContent =
+            "N/A";
+
+        document.getElementById("bookingDate").textContent =
+            "N/A";
+
+        document.getElementById("startTime").textContent =
+            "N/A";
+
+        document.getElementById("duration").textContent =
+            "N/A";
+
+        document.getElementById("totalPrice").textContent =
+            "$0.00";
+
         return;
     }
 
@@ -55,6 +73,7 @@ function loadBooking() {
             booking.parkingSpotId ||
             "N/A";
 
+
         document.getElementById("parkingSpot").textContent =
             typeof parkingSpot === "object"
                 ? parkingSpot.spotNumber || "N/A"
@@ -68,7 +87,13 @@ function loadBooking() {
         const location =
             booking.location ||
             booking.parkingLocation ||
+            (
+                typeof booking.parkingSpotId === "object"
+                    ? booking.parkingSpotId.location
+                    : ""
+            ) ||
             "N/A";
+
 
         document.getElementById("location").textContent =
             typeof location === "object"
@@ -105,11 +130,13 @@ function loadBooking() {
         // =========================
 
         document.getElementById("totalPrice").textContent =
-            `$${booking.totalPrice || 0}`;
+            `$${Number(
+                booking.totalPrice || 0
+            ).toFixed(2)}`;
 
 
         // =========================
-        // GENERATE QR CODE
+        // GENERATE QR
         // =========================
 
         generateQRCode(booking);
@@ -146,13 +173,36 @@ function generateQRCode(booking) {
     qrContainer.innerHTML = "";
 
 
+    // =========================
+    // QR DATA
+    // =========================
+
+    const parkingSpot =
+        booking.parkingSpot ||
+        booking.parkingSpotId ||
+        "";
+
+
+    const location =
+        booking.location ||
+        booking.parkingLocation ||
+        "";
+
+
     const qrData = JSON.stringify({
 
         bookingId:
             booking.bookingId || "",
 
         parkingSpot:
-            booking.parkingSpot || booking.parkingSpotId || "",
+            typeof parkingSpot === "object"
+                ? parkingSpot.spotNumber || ""
+                : parkingSpot,
+
+        location:
+            typeof location === "object"
+                ? location.location || ""
+                : location,
 
         date:
             booking.date || "",
@@ -167,6 +217,25 @@ function generateQRCode(booking) {
             booking.totalPrice || 0
 
     });
+
+
+    // =========================
+    // CREATE QR
+    // =========================
+
+    if (typeof QRCode === "undefined") {
+
+        qrContainer.innerHTML = `
+            <p style="
+                color: #555;
+                font-size: 13px;
+            ">
+                QR Code library could not be loaded.
+            </p>
+        `;
+
+        return;
+    }
 
 
     new QRCode(

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ParkEase | My Bookings</title>
+
+    <link
+        rel="stylesheet"
+        href="my-bookings.css"
+    >
+</head>
+
+<body>
+
+    <!-- Background -->
+
+    <div class="background">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+
+    <main class="bookings-container">
+
+        <section class="bookings-card">
+
+            <!-- Header -->
+
+            <div class="page-header">
+
+                <div>
+
+                    <span class="label">
+                        PARKING MANAGEMENT
+                    </span>
+
+                    <h1>
+                        My Bookings
+                    </h1>
+
+                    <p>
+                        View and manage all your parking bookings.
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="dashboard-button"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    ← Dashboard
+                </button>
+
+            </div>
+
+
+            <!-- Booking Statistics -->
+
+            <div class="stats">
+
+                <div class="stat-box">
+
+                    <span>
+                        Total Bookings
+                    </span>
+
+                    <strong id="totalBookings">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span>
+                        Confirmed
+                    </span>
+
+                    <strong id="confirmedBookings">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span>
+                        Completed
+                    </span>
+
+                    <strong id="completedBookings">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="stat-box">
+
+                    <span>
+                        Cancelled
+                    </span>
+
+                    <strong id="cancelledBookings">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- Message -->
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
+
+            <!-- Bookings -->
+
+            <div
+                id="bookingsList"
+                class="bookings-list"
+            >
+
+                <div class="loading-card">
+
+                    <h3>
+                        Loading bookings...
+                    </h3>
+
+                    <p>
+                        Please wait.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <script src="my-bookings.js"></script>
+
+</body>
+
+</html>

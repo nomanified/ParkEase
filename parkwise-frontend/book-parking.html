@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ParkEase | Book Parking</title>
+
+    <link
+        rel="stylesheet"
+        href="book-parking.css"
+    >
+</head>
+
+<body>
+
+    <!-- =========================
+         BACKGROUND
+    ========================== -->
+
+    <div class="background">
+
+        <div class="circle circle-1"></div>
+
+        <div class="circle circle-2"></div>
+
+        <div class="circle circle-3"></div>
+
+    </div>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="booking-container">
+
+        <section class="booking-card">
+
+
+            <!-- HEADER -->
+
+            <div class="booking-header">
+
+                <span class="label">
+                    PARKING BOOKING
+                </span>
+
+                <h1>
+                    Book Your Parking Spot
+                </h1>
+
+                <p>
+                    Select your date, start time and parking duration.
+                </p>
+
+            </div>
+
+
+            <!-- PARKING INFORMATION -->
+
+            <div class="spot-summary">
+
+                <div>
+
+                    <span>
+                        Parking Location
+                    </span>
+
+                    <strong id="location">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Parking Spot
+                    </span>
+
+                    <strong id="spotNumber">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Parking Type
+                    </span>
+
+                    <strong id="parkingType">
+                        Loading...
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Price Per Hour
+                    </span>
+
+                    <strong id="pricePerHour">
+                        Loading...
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- BOOKING FORM -->
+
+            <form id="bookingForm">
+
+
+                <!-- DATE -->
+
+                <div class="form-group">
+
+                    <label for="bookingDate">
+                        Select Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="bookingDate"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- START TIME -->
+
+                <div class="form-group">
+
+                    <label for="startTime">
+                        Select Start Time
+                    </label>
+
+                    <input
+                        type="time"
+                        id="startTime"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- DURATION -->
+
+                <div class="form-group">
+
+                    <label for="duration">
+                        Select Parking Duration
+                    </label>
+
+                    <select
+                        id="duration"
+                        required
+                    >
+
+                        <option value="">
+                            Select duration
+                        </option>
+
+                        <option value="1">
+                            1 Hour
+                        </option>
+
+                        <option value="2">
+                            2 Hours
+                        </option>
+
+                        <option value="3">
+                            3 Hours
+                        </option>
+
+                        <option value="4">
+                            4 Hours
+                        </option>
+
+                        <option value="5">
+                            5 Hours
+                        </option>
+
+                        <option value="6">
+                            6 Hours
+                        </option>
+
+                        <option value="8">
+                            8 Hours
+                        </option>
+
+                        <option value="12">
+                            12 Hours
+                        </option>
+
+                        <option value="24">
+                            24 Hours
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- TOTAL -->
+
+                <div class="total-box">
+
+                    <span>
+                        Total Price
+                    </span>
+
+                    <strong id="totalPrice">
+                        $0
+                    </strong>
+
+                </div>
+
+
+                <!-- MESSAGE -->
+
+                <div
+                    id="message"
+                    class="message"
+                ></div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="actions">
+
+                    <button
+                        type="button"
+                        class="back-button"
+                        onclick="window.location.href='parking-details.html'"
+                    >
+                        ← Back
+                    </button>
+
+
+                    <button
+                        type="submit"
+                        id="bookButton"
+                        class="book-button"
+                    >
+                        Confirm Booking
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script src="book-parking.js"></script>
+
+</body>
+
+</html>

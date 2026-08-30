@@ -516,9 +516,7 @@ function viewParkingDetails(id) {
         id
     );
 
-    alert(
-        "Parking spot selected. Details page coming next!"
-    );
+    window.location.href = "parking-details.html";
 }
 
 

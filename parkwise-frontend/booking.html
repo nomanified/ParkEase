@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Book Parking</title>
+
+    <link rel="stylesheet" href="booking.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+
+    <main class="booking-container">
+
+        <section class="booking-card">
+
+            <div class="page-header">
+
+                <div>
+                    <span class="label">PARKEASE BOOKING</span>
+
+                    <h1>Book Your Parking Spot</h1>
+
+                    <p>
+                        Select your date, time and parking duration.
+                    </p>
+                </div>
+
+                <button
+                    class="back-button"
+                    onclick="window.location.href='dashboard.html'"
+                >
+                    ← Dashboard
+                </button>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <!-- PARKING INFORMATION -->
+
+            <section class="parking-info">
+
+                <h2>Parking Spot</h2>
+
+                <div class="info-grid">
+
+                    <div class="info-box">
+                        <span>📍 Location</span>
+                        <strong id="location">
+                            Loading...
+                        </strong>
+                    </div>
+
+                    <div class="info-box">
+                        <span>🅿️ Spot Number</span>
+                        <strong id="spotNumber">
+                            Loading...
+                        </strong>
+                    </div>
+
+                    <div class="info-box">
+                        <span>🚗 Parking Type</span>
+                        <strong id="parkingType">
+                            Loading...
+                        </strong>
+                    </div>
+
+                    <div class="info-box">
+                        <span>💰 Price Per Hour</span>
+                        <strong id="price">
+                            Loading...
+                        </strong>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- BOOKING FORM -->
+
+            <section class="booking-form-section">
+
+                <h2>Booking Details</h2>
+
+                <form id="bookingForm">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="bookingDate">
+                                Select Date
+                            </label>
+
+                            <input
+                                type="date"
+                                id="bookingDate"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="startTime">
+                                Start Time
+                            </label>
+
+                            <input
+                                type="time"
+                                id="startTime"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label for="duration">
+                                Parking Duration
+                            </label>
+
+                            <select
+                                id="duration"
+                                required
+                            >
+
+                                <option value="">
+                                    Select duration
+                                </option>
+
+                                <option value="1">
+                                    1 Hour
+                                </option>
+
+                                <option value="2">
+                                    2 Hours
+                                </option>
+
+                                <option value="3">
+                                    3 Hours
+                                </option>
+
+                                <option value="4">
+                                    4 Hours
+                                </option>
+
+                                <option value="5">
+                                    5 Hours
+                                </option>
+
+                                <option value="6">
+                                    6 Hours
+                                </option>
+
+                                <option value="8">
+                                    8 Hours
+                                </option>
+
+                                <option value="12">
+                                    12 Hours
+                                </option>
+
+                                <option value="24">
+                                    24 Hours
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- TOTAL -->
+
+                    <div class="total-box">
+
+                        <div>
+                            <span>Total Price</span>
+
+                            <small>
+                                Price is calculated automatically.
+                            </small>
+                        </div>
+
+                        <strong id="totalPrice">
+                            $0
+                        </strong>
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="message"
+                        class="message"
+                    ></div>
+
+
+                    <!-- BUTTON -->
+
+                    <button
+                        type="submit"
+                        id="bookButton"
+                        class="book-button"
+                    >
+                        Confirm Booking
+                    </button>
+
+                </form>
+
+            </section>
+
+        </section>
+
+    </main>
+
+
+    <script src="booking.js"></script>
+
+</body>
+
+</html>
