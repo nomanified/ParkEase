@@ -519,7 +519,6 @@ function viewParkingDetails(id) {
     window.location.href = "parking-details.html";
 }
 
-
 // =========================
 // LOGOUT
 // =========================

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Admin Dashboard</title>
+
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+
+    <main class="admin-container">
+
+        <section class="admin-card">
+
+            <!-- HEADER -->
+
+            <div class="admin-header">
+
+                <div>
+                    <span class="label">
+                        PARKEASE MANAGEMENT
+                    </span>
+
+                    <h1>
+                        Admin Dashboard
+                    </h1>
+
+                    <p>
+                        Manage users, parking spaces and bookings.
+                    </p>
+                </div>
+
+                <button
+                    id="logoutButton"
+                    class="logout-button"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+
+            <!-- STATISTICS -->
+
+            <div class="stats-grid">
+
+                <div class="stat-box">
+                    <span>Total Users</span>
+                    <strong id="totalUsers">0</strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Parking Spots</span>
+                    <strong id="totalSpots">0</strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Total Bookings</span>
+                    <strong id="totalBookings">0</strong>
+                </div>
+
+                <div class="stat-box">
+                    <span>Active Bookings</span>
+                    <strong id="activeBookings">0</strong>
+                </div>
+
+            </div>
+
+
+            <!-- QUICK ACTIONS -->
+
+            <div class="section">
+
+                <h2>
+                    Quick Actions
+                </h2>
+
+                <div class="action-grid">
+
+                    <button
+                        class="action-button"
+                        id="manageUsersButton"
+                    >
+                        👥 Manage Users
+                    </button>
+
+                    <button
+                        class="action-button"
+                        id="manageParkingButton"
+                    >
+                        🅿️ Manage Parking
+                    </button>
+
+                    <button
+                        class="action-button"
+                        id="manageBookingsButton"
+                    >
+                        📋 Manage Bookings
+                    </button>
+
+                    <button
+                        class="action-button"
+                        id="refreshButton"
+                    >
+                        🔄 Refresh Dashboard
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- RECENT BOOKINGS -->
+
+            <div class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Recent Bookings
+                    </h2>
+
+                    <span id="bookingMessage">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="recentBookings"
+                    class="booking-list"
+                >
+
+                    <div class="empty-box">
+                        <h3>
+                            Loading bookings...
+                        </h3>
+
+                        <p>
+                            Please wait.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- PARKING STATUS -->
+
+            <div class="section">
+
+                <div class="section-header">
+
+                    <h2>
+                        Parking Overview
+                    </h2>
+
+                    <span id="parkingMessage">
+                        Loading...
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="parkingOverview"
+                    class="parking-list"
+                >
+
+                    <div class="empty-box">
+
+                        <h3>
+                            Loading parking spots...
+                        </h3>
+
+                        <p>
+                            Please wait.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+
+    <script src="admin-dashboard.js"></script>
+
+</body>
+
+</html>

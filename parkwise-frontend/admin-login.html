@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Admin Login</title>
+
+    <link rel="stylesheet" href="admin-login.css">
+</head>
+
+<body>
+
+    <div class="background">
+        <div class="circle circle-1"></div>
+        <div class="circle circle-2"></div>
+        <div class="circle circle-3"></div>
+    </div>
+
+    <main class="login-container">
+
+        <section class="login-card">
+
+            <div class="logo">
+                P
+            </div>
+
+            <span class="label">
+                PARKEASE ADMIN
+            </span>
+
+            <h1>
+                Admin Login
+            </h1>
+
+            <p class="subtitle">
+                Sign in to manage users, parking spots and bookings.
+            </p>
+
+            <form id="adminLoginForm">
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Admin Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter admin email"
+                        required
+                    >
+
+                </div>
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Enter admin password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    type="submit"
+                    id="loginButton"
+                >
+                    Login to Admin Panel
+                </button>
+
+            </form>
+
+            <p
+                id="message"
+                class="message"
+            ></p>
+
+            <div class="bottom-link">
+
+                <a href="login.html">
+                    ← Back to User Login
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="admin-login.js"></script>
+
+</body>
+
+</html>
