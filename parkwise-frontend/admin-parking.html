@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ParkEase | Parking Management</title>
+
+    <link rel="stylesheet" href="admin-parking.css">
+</head>
+
+<body>
+
+<div class="background">
+    <div class="circle circle-1"></div>
+    <div class="circle circle-2"></div>
+    <div class="circle circle-3"></div>
+</div>
+
+<main class="admin-container">
+
+    <section class="admin-card">
+
+        <div class="page-header">
+
+            <div>
+                <span class="label">PARKEASE ADMIN</span>
+
+                <h1>Parking Management</h1>
+
+                <p>
+                    Add, edit, delete and manage parking spaces.
+                </p>
+            </div>
+
+            <div class="header-actions">
+
+                <button
+                    class="back-button"
+                    onclick="window.location.href='admin-dashboard.html'"
+                >
+                    ← Dashboard
+                </button>
+
+                <button
+                    class="logout-button"
+                    id="logoutButton"
+                >
+                    Logout
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div id="message" class="message"></div>
+
+
+        <!-- ADD PARKING -->
+
+        <div class="form-section">
+
+            <h2 id="formTitle">
+                Add Parking Spot
+            </h2>
+
+            <form id="parkingForm">
+
+                <input
+                    type="hidden"
+                    id="spotId"
+                >
+
+                <div class="form-grid">
+
+                    <div class="form-group">
+
+                        <label for="spotNumber">
+                            Parking Spot Number
+                        </label>
+
+                        <input
+                            type="text"
+                            id="spotNumber"
+                            placeholder="e.g. A-101"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            id="location"
+                            placeholder="e.g. Main Mall"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="parkingType">
+                            Parking Type
+                        </label>
+
+                        <select id="parkingType" required>
+
+                            <option value="">
+                                Select Type
+                            </option>
+
+                            <option value="Car">
+                                Car
+                            </option>
+
+                            <option value="Bike">
+                                Bike
+                            </option>
+
+                            <option value="Disabled">
+                                Disabled
+                            </option>
+
+                            <option value="EV">
+                                EV
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="pricePerHour">
+                            Price Per Hour
+                        </label>
+
+                        <input
+                            type="number"
+                            id="pricePerHour"
+                            min="0"
+                            step="0.01"
+                            placeholder="e.g. 5"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="status">
+                            Status
+                        </label>
+
+                        <select id="status" required>
+
+                            <option value="Available">
+                                Available
+                            </option>
+
+                            <option value="Occupied">
+                                Occupied
+                            </option>
+
+                            <option value="Reserved">
+                                Reserved
+                            </option>
+
+                            <option value="Maintenance">
+                                Maintenance
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="availableTime">
+                            Available Time
+                        </label>
+
+                        <input
+                            type="text"
+                            id="availableTime"
+                            placeholder="e.g. 8:00 AM - 10:00 PM"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="instructions">
+                        Parking Instructions
+                    </label>
+
+                    <textarea
+                        id="instructions"
+                        rows="3"
+                        placeholder="Enter parking instructions"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-group full">
+
+                    <label for="description">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="description"
+                        rows="3"
+                        placeholder="Enter parking description"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="form-buttons">
+
+                    <button
+                        type="submit"
+                        id="saveButton"
+                        class="save-button"
+                    >
+                        Add Parking Spot
+                    </button>
+
+                    <button
+                        type="button"
+                        id="cancelEditButton"
+                        class="cancel-button"
+                        style="display:none;"
+                    >
+                        Cancel Edit
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- SEARCH -->
+
+        <div class="list-header">
+
+            <div>
+                <h2>All Parking Spots</h2>
+                <p>Manage your parking spaces below.</p>
+            </div>
+
+            <input
+                type="text"
+                id="searchParking"
+                placeholder="Search parking..."
+            >
+
+        </div>
+
+
+        <!-- PARKING LIST -->
+
+        <div
+            id="parkingList"
+            class="parking-list"
+        >
+
+            <div class="loading-card">
+                <h3>Loading parking spots...</h3>
+                <p>Please wait.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<script src="admin-parking.js"></script>
+
+</body>
+</html>

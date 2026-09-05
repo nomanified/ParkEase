@@ -8,11 +8,8 @@ const token =
 const userData =
     localStorage.getItem("parkEaseUser");
 
-
 if (!token) {
-
-    window.location.href =
-        "login.html";
+    window.location.href = "login.html";
 }
 
 
@@ -22,23 +19,12 @@ if (!token) {
 
 let user = null;
 
-
 if (userData) {
-
     try {
-
-        user =
-            JSON.parse(userData);
-
+        user = JSON.parse(userData);
     } catch (error) {
-
-        console.error(
-            "User data error:",
-            error
-        );
-
+        console.error("User data error:", error);
     }
-
 }
 
 
@@ -47,17 +33,12 @@ if (userData) {
 // =========================
 
 if (
-    user &&
-    user.role &&
-    user.role !== "admin"
+    !user ||
+    !user.role ||
+    String(user.role).toLowerCase() !== "admin"
 ) {
-
-    alert(
-        "Admin access required."
-    );
-
-    window.location.href =
-        "dashboard.html";
+    alert("Admin access required.");
+    window.location.href = "login.html";
 }
 
 
@@ -66,34 +47,169 @@ if (
 // =========================
 
 const totalUsers =
-    document.getElementById(
-        "totalUsers"
-    );
+    document.getElementById("totalUsers");
 
 const totalSpots =
-    document.getElementById(
-        "totalSpots"
-    );
+    document.getElementById("totalSpots");
 
 const totalBookings =
-    document.getElementById(
-        "totalBookings"
-    );
+    document.getElementById("totalBookings");
 
 const activeBookings =
-    document.getElementById(
-        "activeBookings"
-    );
+    document.getElementById("activeBookings");
 
 const recentBookings =
-    document.getElementById(
-        "recentBookings"
-    );
+    document.getElementById("recentBookings");
 
 const parkingOverview =
-    document.getElementById(
-        "parkingOverview"
-    );
+    document.getElementById("parkingOverview");
+
+const parkingManagementList =
+    document.getElementById("parkingManagementList");
+
+const parkingModal =
+    document.getElementById("parkingModal");
+
+const parkingForm =
+    document.getElementById("parkingForm");
+
+const addParkingButton =
+    document.getElementById("addParkingButton");
+
+const closeParkingModal =
+    document.getElementById("closeParkingModal");
+
+const parkingModalTitle =
+    document.getElementById("parkingModalTitle");
+
+const parkingFormMessage =
+    document.getElementById("parkingFormMessage");
+
+
+// =========================
+// FORM ELEMENTS
+// =========================
+
+const parkingId =
+    document.getElementById("parkingId");
+
+const spotNumber =
+    document.getElementById("spotNumber");
+
+const parkingLocation =
+    document.getElementById("parkingLocation");
+
+const parkingType =
+    document.getElementById("parkingType");
+
+const pricePerHour =
+    document.getElementById("pricePerHour");
+
+const parkingStatus =
+    document.getElementById("parkingStatus");
+
+const availableTime =
+    document.getElementById("availableTime");
+
+const parkingInstructions =
+    document.getElementById("parkingInstructions");
+
+const parkingDescription =
+    document.getElementById("parkingDescription");
+
+const saveParkingButton =
+    document.getElementById("saveParkingButton");
+
+
+// =========================
+// API URL
+// =========================
+
+const API =
+    "http://localhost:5000";
+
+
+// =========================
+// PARKING DATA
+// =========================
+
+let parkingSpots = [];
+
+
+// =========================
+// LOAD DASHBOARD
+// =========================
+
+async function loadDashboard() {
+
+    await loadAdminStats();
+
+    await loadParking();
+
+    await loadBookings();
+
+}
+
+
+// =========================
+// LOAD ADMIN STATS
+// =========================
+
+async function loadAdminStats() {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/admin/stats`
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.message ||
+                "Unable to load statistics"
+            );
+        }
+
+        const stats =
+            data.stats || {};
+
+        if (totalUsers) {
+            totalUsers.textContent =
+                stats.totalUsers || 0;
+        }
+
+        if (totalSpots) {
+            totalSpots.textContent =
+                stats.totalParkingSpots || 0;
+        }
+
+        if (totalBookings) {
+            totalBookings.textContent =
+                stats.totalBookings || 0;
+        }
+
+        if (activeBookings) {
+            activeBookings.textContent =
+                (
+                    Number(stats.confirmedBookings || 0) +
+                    Number(stats.reservedSpots || 0)
+                );
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Admin stats error:",
+            error
+        );
+
+    }
+
+}
 
 
 // =========================
@@ -106,13 +222,11 @@ async function loadParking() {
 
         const response =
             await fetch(
-                "http://localhost:5000/api/parking"
+                `${API}/api/parking`
             );
-
 
         const data =
             await response.json();
-
 
         if (!response.ok) {
 
@@ -123,19 +237,21 @@ async function loadParking() {
 
         }
 
-
-        const spots =
+        parkingSpots =
             data.spots || [];
 
-
-        totalSpots.textContent =
-            spots.length;
-
+        if (totalSpots) {
+            totalSpots.textContent =
+                parkingSpots.length;
+        }
 
         displayParking(
-            spots
+            parkingSpots
         );
 
+        displayParkingManagement(
+            parkingSpots
+        );
 
     } catch (error) {
 
@@ -144,20 +260,39 @@ async function loadParking() {
             error
         );
 
+        if (parkingOverview) {
 
-        parkingOverview.innerHTML = `
-            <div class="empty-box">
+            parkingOverview.innerHTML = `
+                <div class="empty-box">
 
-                <h3>
-                    Unable to Load Parking
-                </h3>
+                    <h3>
+                        Unable to Load Parking
+                    </h3>
 
-                <p>
-                    Check your backend API.
-                </p>
+                    <p>
+                        Check your backend server.
+                    </p>
 
-            </div>
-        `;
+                </div>
+            `;
+        }
+
+        if (parkingManagementList) {
+
+            parkingManagementList.innerHTML = `
+                <div class="empty-box">
+
+                    <h3>
+                        Unable to Load Parking
+                    </h3>
+
+                    <p>
+                        Check your backend server.
+                    </p>
+
+                </div>
+            `;
+        }
 
     }
 
@@ -165,13 +300,16 @@ async function loadParking() {
 
 
 // =========================
-// DISPLAY PARKING
+// DISPLAY PARKING OVERVIEW
 // =========================
 
 function displayParking(spots) {
 
-    parkingOverview.innerHTML = "";
+    if (!parkingOverview) {
+        return;
+    }
 
+    parkingOverview.innerHTML = "";
 
     if (spots.length === 0) {
 
@@ -183,7 +321,7 @@ function displayParking(spots) {
                 </h3>
 
                 <p>
-                    No parking spots available.
+                    Add your first parking spot.
                 </p>
 
             </div>
@@ -197,52 +335,703 @@ function displayParking(spots) {
         (spot) => {
 
             const item =
-                document.createElement(
-                    "div"
-                );
-
+                document.createElement("div");
 
             item.className =
                 "parking-item";
-
 
             item.innerHTML = `
 
                 <div>
 
                     <div class="item-title">
-                        ${spot.spotNumber || "N/A"}
+                        ${escapeHTML(
+                            spot.spotNumber || "N/A"
+                        )}
                     </div>
 
                     <div class="item-info">
 
-                        📍 ${spot.location || "N/A"}
+                        📍 ${escapeHTML(
+                            spot.location || "N/A"
+                        )}
+
                         <br>
 
-                        🚗 ${spot.parkingType || "N/A"}
+                        🚗 ${escapeHTML(
+                            spot.parkingType || "N/A"
+                        )}
+
                         <br>
 
-                        💰 $${spot.pricePerHour || 0}/hour
+                        💰 $${Number(
+                            spot.pricePerHour || 0
+                        )}/hour
 
                     </div>
 
                 </div>
 
                 <span class="item-status">
-
-                    ${spot.status || "Unknown"}
-
+                    ${escapeHTML(
+                        spot.status || "Unknown"
+                    )}
                 </span>
 
             `;
 
+            parkingOverview.appendChild(item);
 
-            parkingOverview.appendChild(
+        }
+    );
+
+}
+
+
+// =========================
+// DISPLAY PARKING MANAGEMENT
+// =========================
+
+function displayParkingManagement(spots) {
+
+    if (!parkingManagementList) {
+        return;
+    }
+
+    parkingManagementList.innerHTML = "";
+
+
+    if (spots.length === 0) {
+
+        parkingManagementList.innerHTML = `
+            <div class="empty-box">
+
+                <h3>
+                    No Parking Spots
+                </h3>
+
+                <p>
+                    Click "Add Parking Spot"
+                    to create one.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+
+    spots.forEach(
+        (spot) => {
+
+            const item =
+                document.createElement("div");
+
+            item.className =
+                "parking-item";
+
+            item.innerHTML = `
+
+                <div>
+
+                    <div class="item-title">
+                        🅿️ ${escapeHTML(
+                            spot.spotNumber || "N/A"
+                        )}
+                    </div>
+
+                    <div class="item-info">
+
+                        📍 ${escapeHTML(
+                            spot.location || "N/A"
+                        )}
+
+                        <br>
+
+                        🚗 ${escapeHTML(
+                            spot.parkingType || "N/A"
+                        )}
+
+                        <br>
+
+                        💰 $${Number(
+                            spot.pricePerHour || 0
+                        )}/hour
+
+                        <br>
+
+                        🕐 ${escapeHTML(
+                            spot.availableTime ||
+                            "24 Hours"
+                        )}
+
+                    </div>
+
+                </div>
+
+
+                <div class="parking-actions">
+
+                    <span class="item-status">
+                        ${escapeHTML(
+                            spot.status || "Unknown"
+                        )}
+                    </span>
+
+                    <button
+                        type="button"
+                        class="action-button edit-parking"
+                        data-id="${spot._id}"
+                    >
+                        ✏️ Edit
+                    </button>
+
+                    <button
+                        type="button"
+                        class="action-button delete-parking"
+                        data-id="${spot._id}"
+                    >
+                        🗑️ Delete
+                    </button>
+
+                </div>
+
+            `;
+
+            parkingManagementList.appendChild(
                 item
             );
 
         }
     );
+
+
+    // EDIT BUTTONS
+
+    document
+        .querySelectorAll(".edit-parking")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const id =
+                        button.dataset.id;
+
+                    openEditParking(
+                        id
+                    );
+
+                }
+            );
+
+        });
+
+
+    // DELETE BUTTONS
+
+    document
+        .querySelectorAll(".delete-parking")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    const id =
+                        button.dataset.id;
+
+                    deleteParking(
+                        id
+                    );
+
+                }
+            );
+
+        });
+
+}
+
+
+// =========================
+// OPEN ADD MODAL
+// =========================
+
+function openAddParking() {
+
+    if (!parkingModal) {
+        return;
+    }
+
+    parkingModalTitle.textContent =
+        "Add Parking Spot";
+
+    parkingForm.reset();
+
+    parkingId.value = "";
+
+    parkingStatus.value =
+        "Available";
+
+    availableTime.value =
+        "24 Hours";
+
+    parkingFormMessage.textContent =
+        "";
+
+    parkingModal.style.display =
+        "flex";
+
+}
+
+
+// =========================
+// OPEN EDIT MODAL
+// =========================
+
+function openEditParking(id) {
+
+    const spot =
+        parkingSpots.find(
+            item =>
+                String(item._id) ===
+                String(id)
+        );
+
+    if (!spot) {
+
+        alert(
+            "Parking spot not found."
+        );
+
+        return;
+    }
+
+
+    parkingModalTitle.textContent =
+        "Edit Parking Spot";
+
+
+    parkingId.value =
+        spot._id || "";
+
+
+    spotNumber.value =
+        spot.spotNumber || "";
+
+
+    parkingLocation.value =
+        spot.location || "";
+
+
+    parkingType.value =
+        spot.parkingType || "";
+
+
+    pricePerHour.value =
+        spot.pricePerHour || 0;
+
+
+    parkingStatus.value =
+        spot.status || "Available";
+
+
+    availableTime.value =
+        spot.availableTime ||
+        "24 Hours";
+
+
+    parkingInstructions.value =
+        spot.instructions || "";
+
+
+    parkingDescription.value =
+        spot.description || "";
+
+
+    parkingFormMessage.textContent =
+        "";
+
+
+    parkingModal.style.display =
+        "flex";
+
+}
+
+
+// =========================
+// CLOSE MODAL
+// =========================
+
+function closeModal() {
+
+    if (parkingModal) {
+
+        parkingModal.style.display =
+            "none";
+
+    }
+
+}
+
+
+// =========================
+// SAVE PARKING
+// =========================
+
+async function saveParking(event) {
+
+    event.preventDefault();
+
+
+    const id =
+        parkingId.value.trim();
+
+
+    const payload = {
+
+        spotNumber:
+            spotNumber.value.trim(),
+
+        location:
+            parkingLocation.value.trim(),
+
+        parkingType:
+            parkingType.value,
+
+        pricePerHour:
+            Number(pricePerHour.value),
+
+        status:
+            parkingStatus.value,
+
+        availableTime:
+            availableTime.value.trim(),
+
+        instructions:
+            parkingInstructions.value.trim(),
+
+        description:
+            parkingDescription.value.trim()
+
+    };
+
+
+    if (!payload.spotNumber) {
+
+        parkingFormMessage.textContent =
+            "Please enter spot number.";
+
+        return;
+    }
+
+
+    if (!payload.location) {
+
+        parkingFormMessage.textContent =
+            "Please enter location.";
+
+        return;
+    }
+
+
+    if (!payload.parkingType) {
+
+        parkingFormMessage.textContent =
+            "Please select parking type.";
+
+        return;
+    }
+
+
+    if (
+        Number.isNaN(
+            payload.pricePerHour
+        ) ||
+        payload.pricePerHour < 0
+    ) {
+
+        parkingFormMessage.textContent =
+            "Please enter a valid price.";
+
+        return;
+    }
+
+
+    try {
+
+        saveParkingButton.disabled =
+            true;
+
+        saveParkingButton.textContent =
+            id
+                ? "Updating..."
+                : "Creating...";
+
+
+        const url =
+            id
+                ? `${API}/api/parking/${id}`
+                : `${API}/api/parking`;
+
+
+        const method =
+            id
+                ? "PUT"
+                : "POST";
+
+
+        const response =
+            await fetch(
+                url,
+                {
+
+                    method,
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    },
+
+                    body:
+                        JSON.stringify(
+                            payload
+                        )
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to save parking spot."
+            );
+
+        }
+
+
+        parkingFormMessage.style.color =
+            "#86efac";
+
+        parkingFormMessage.textContent =
+            id
+                ? "Parking spot updated successfully."
+                : "Parking spot created successfully.";
+
+
+        await loadDashboard();
+
+
+        setTimeout(
+            () => {
+
+                closeModal();
+
+            },
+            700
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Save parking error:",
+            error
+        );
+
+
+        parkingFormMessage.style.color =
+            "#fca5a5";
+
+        parkingFormMessage.textContent =
+            error.message ||
+            "Unable to save parking spot.";
+
+    } finally {
+
+        saveParkingButton.disabled =
+            false;
+
+        saveParkingButton.textContent =
+            "Save Parking Spot";
+
+    }
+
+}
+
+
+// =========================
+// DELETE PARKING
+// =========================
+
+async function deleteParking(id) {
+
+    const spot =
+        parkingSpots.find(
+            item =>
+                String(item._id) ===
+                String(id)
+        );
+
+
+    const spotName =
+        spot
+            ? spot.spotNumber
+            : "this parking spot";
+
+
+    const confirmed =
+        confirm(
+            `Are you sure you want to delete ${spotName}?`
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/parking/${id}`,
+                {
+
+                    method: "DELETE",
+
+                    headers: {
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    }
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to delete parking spot."
+            );
+
+        }
+
+
+        alert(
+            "Parking spot deleted successfully."
+        );
+
+
+        await loadDashboard();
+
+
+    } catch (error) {
+
+        console.error(
+            "Delete parking error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to delete parking spot."
+        );
+
+    }
+
+}
+
+
+// =========================
+// CHANGE PARKING STATUS
+// =========================
+
+async function changeParkingStatus(
+    id,
+    status
+) {
+
+    try {
+
+        const response =
+            await fetch(
+                `${API}/api/parking/${id}/status`,
+                {
+
+                    method: "PATCH",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/json",
+
+                        "Authorization":
+                            `Bearer ${token}`
+
+                    },
+
+                    body:
+                        JSON.stringify({
+                            status
+                        })
+
+                }
+            );
+
+
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to change status."
+            );
+
+        }
+
+
+        await loadDashboard();
+
+
+    } catch (error) {
+
+        console.error(
+            "Status change error:",
+            error
+        );
+
+
+        alert(
+            error.message ||
+            "Unable to change parking status."
+        );
+
+    }
 
 }
 
@@ -255,54 +1044,52 @@ async function loadBookings() {
 
     try {
 
-        /*
-         * Temporary admin booking
-         * endpoint.
-         *
-         * We will create the proper
-         * admin endpoint in backend
-         * next.
-         */
-
         const response =
             await fetch(
-                "http://localhost:5000/api/bookings"
+                `${API}/api/admin/bookings`
             );
-
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Unable to load bookings"
-            );
-
-        }
 
 
         const data =
             await response.json();
 
 
+        if (!response.ok) {
+
+            throw new Error(
+                data.message ||
+                "Unable to load bookings"
+            );
+
+        }
+
+
         const bookings =
             data.bookings || [];
 
 
-        totalBookings.textContent =
-            bookings.length;
+        if (totalBookings) {
+
+            totalBookings.textContent =
+                bookings.length;
+
+        }
 
 
         const active =
             bookings.filter(
                 booking =>
-                    booking.status ===
-                    "Active" ||
-                    booking.status ===
-                    "Confirmed"
+                    booking.status === "Active" ||
+                    booking.status === "Confirmed"
             );
 
 
-        activeBookings.textContent =
-            active.length;
+        if (activeBookings) {
+
+            activeBookings.textContent =
+                active.length;
+
+        }
 
 
         displayBookings(
@@ -318,20 +1105,25 @@ async function loadBookings() {
         );
 
 
-        recentBookings.innerHTML = `
-            <div class="empty-box">
+        if (recentBookings) {
 
-                <h3>
-                    Booking API Not Ready
-                </h3>
+            recentBookings.innerHTML = `
+                <div class="empty-box">
 
-                <p>
-                    Admin booking API will be
-                    connected next.
-                </p>
+                    <h3>
+                        Unable to Load Bookings
+                    </h3>
 
-            </div>
-        `;
+                    <p>
+                        ${escapeHTML(
+                            error.message
+                        )}
+                    </p>
+
+                </div>
+            `;
+
+        }
 
     }
 
@@ -345,6 +1137,11 @@ async function loadBookings() {
 function displayBookings(
     bookings
 ) {
+
+    if (!recentBookings) {
+        return;
+    }
+
 
     recentBookings.innerHTML = "";
 
@@ -394,7 +1191,10 @@ function displayBookings(
 
                         <div class="item-title">
 
-                            ${booking.bookingId || "N/A"}
+                            ${escapeHTML(
+                                booking.bookingId ||
+                                "N/A"
+                            )}
 
                         </div>
 
@@ -403,20 +1203,26 @@ function displayBookings(
                             🅿️ ${
                                 spot &&
                                 spot.spotNumber
-                                    ? spot.spotNumber
+                                    ? escapeHTML(
+                                        spot.spotNumber
+                                    )
                                     : "N/A"
                             }
 
                             <br>
 
                             📅 ${
-                                booking.date ||
-                                "N/A"
+                                escapeHTML(
+                                    booking.date ||
+                                    "N/A"
+                                )
                             }
 
                             <br>
 
-                            💰 $${booking.totalPrice || 0}
+                            💰 $${Number(
+                                booking.totalPrice || 0
+                            )}
 
                         </div>
 
@@ -425,7 +1231,10 @@ function displayBookings(
 
                     <span class="item-status">
 
-                        ${booking.status || "Unknown"}
+                        ${escapeHTML(
+                            booking.status ||
+                            "Unknown"
+                        )}
 
                     </span>
 
@@ -443,7 +1252,7 @@ function displayBookings(
 
 
 // =========================
-// REFRESH
+// REFRESH BUTTON
 // =========================
 
 const refreshButton =
@@ -467,19 +1276,84 @@ if (refreshButton) {
 
 
 // =========================
+// ADD PARKING BUTTON
+// =========================
+
+if (addParkingButton) {
+
+    addParkingButton.addEventListener(
+        "click",
+        openAddParking
+    );
+
+}
+
+
+// =========================
+// CLOSE MODAL BUTTON
+// =========================
+
+if (closeParkingModal) {
+
+    closeParkingModal.addEventListener(
+        "click",
+        closeModal
+    );
+
+}
+
+
+// =========================
+// FORM SUBMIT
+// =========================
+
+if (parkingForm) {
+
+    parkingForm.addEventListener(
+        "submit",
+        saveParking
+    );
+
+}
+
+
+// =========================
+// CLOSE MODAL OUTSIDE
+// =========================
+
+if (parkingModal) {
+
+    parkingModal.addEventListener(
+        "click",
+        (event) => {
+
+            if (
+                event.target ===
+                parkingModal
+            ) {
+
+                closeModal();
+
+            }
+
+        }
+    );
+
+}
+
+
+// =========================
 // QUICK ACTIONS
 // =========================
 
 document
-    .getElementById(
-        "manageUsersButton"
-    )
+    .getElementById("manageUsersButton")
     ?.addEventListener(
         "click",
         () => {
 
             alert(
-                "User management will be connected next."
+                "User management will be added next."
             );
 
         }
@@ -487,31 +1361,31 @@ document
 
 
 document
-    .getElementById(
-        "manageParkingButton"
-    )
+    .getElementById("manageParkingButton")
     ?.addEventListener(
         "click",
         () => {
 
-            alert(
-                "Parking management will be connected next."
-            );
+            document
+                .getElementById(
+                    "addParkingButton"
+                )
+                ?.scrollIntoView({
+                    behavior: "smooth"
+                });
 
         }
     );
 
 
 document
-    .getElementById(
-        "manageBookingsButton"
-    )
+    .getElementById("manageBookingsButton")
     ?.addEventListener(
         "click",
         () => {
 
             alert(
-                "Booking management will be connected next."
+                "Booking management will be added next."
             );
 
         }
@@ -523,9 +1397,7 @@ document
 // =========================
 
 document
-    .getElementById(
-        "logoutButton"
-    )
+    .getElementById("logoutButton")
     ?.addEventListener(
         "click",
         () => {
@@ -538,6 +1410,10 @@ document
                 "parkEaseUser"
             );
 
+            localStorage.removeItem(
+                "parkEaseAdmin"
+            );
+
             window.location.href =
                 "login.html";
 
@@ -546,16 +1422,23 @@ document
 
 
 // =========================
-// LOAD DASHBOARD
+// HTML SECURITY HELPER
 // =========================
 
-async function loadDashboard() {
+function escapeHTML(value) {
 
-    await loadParking();
-
-    await loadBookings();
+    return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
+
+// =========================
+// START
+// =========================
 
 loadDashboard();

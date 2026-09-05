@@ -1,209 +1,251 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- =========================
+     PARKING MANAGEMENT
+========================= -->
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<div class="section">
 
-    <title>ParkEase | Admin Dashboard</title>
+    <div class="section-header">
 
-    <link rel="stylesheet" href="admin-dashboard.css">
-</head>
+        <div>
+            <h2>Parking Management</h2>
+            <span>Add, edit, delete and manage parking spots.</span>
+        </div>
 
-<body>
+        <button
+            id="addParkingButton"
+            class="action-button"
+            type="button"
+        >
+            ➕ Add Parking Spot
+        </button>
 
-    <div class="background">
-        <div class="circle circle-1"></div>
-        <div class="circle circle-2"></div>
-        <div class="circle circle-3"></div>
     </div>
 
 
-    <main class="admin-container">
+    <div
+        id="parkingManagementList"
+        class="parking-list"
+    >
 
-        <section class="admin-card">
+        <div class="empty-box">
+            <h3>Loading parking management...</h3>
+            <p>Please wait.</p>
+        </div>
 
-            <!-- HEADER -->
+    </div>
 
-            <div class="admin-header">
-
-                <div>
-                    <span class="label">
-                        PARKEASE MANAGEMENT
-                    </span>
-
-                    <h1>
-                        Admin Dashboard
-                    </h1>
-
-                    <p>
-                        Manage users, parking spaces and bookings.
-                    </p>
-                </div>
-
-                <button
-                    id="logoutButton"
-                    class="logout-button"
-                >
-                    Logout
-                </button>
-
-            </div>
+</div>
 
 
-            <!-- STATISTICS -->
+<!-- =========================
+     ADD / EDIT PARKING MODAL
+========================= -->
 
-            <div class="stats-grid">
+<div
+    id="parkingModal"
+    class="modal"
+    style="display:none;"
+>
 
-                <div class="stat-box">
-                    <span>Total Users</span>
-                    <strong id="totalUsers">0</strong>
-                </div>
+    <div class="modal-content">
 
-                <div class="stat-box">
-                    <span>Parking Spots</span>
-                    <strong id="totalSpots">0</strong>
-                </div>
+        <div class="section-header">
 
-                <div class="stat-box">
-                    <span>Total Bookings</span>
-                    <strong id="totalBookings">0</strong>
-                </div>
+            <h2 id="parkingModalTitle">
+                Add Parking Spot
+            </h2>
 
-                <div class="stat-box">
-                    <span>Active Bookings</span>
-                    <strong id="activeBookings">0</strong>
-                </div>
+            <button
+                id="closeParkingModal"
+                type="button"
+            >
+                ✕
+            </button>
 
-            </div>
-
-
-            <!-- QUICK ACTIONS -->
-
-            <div class="section">
-
-                <h2>
-                    Quick Actions
-                </h2>
-
-                <div class="action-grid">
-
-                    <button
-                        class="action-button"
-                        id="manageUsersButton"
-                    >
-                        👥 Manage Users
-                    </button>
-
-                    <button
-                        class="action-button"
-                        id="manageParkingButton"
-                    >
-                        🅿️ Manage Parking
-                    </button>
-
-                    <button
-                        class="action-button"
-                        id="manageBookingsButton"
-                    >
-                        📋 Manage Bookings
-                    </button>
-
-                    <button
-                        class="action-button"
-                        id="refreshButton"
-                    >
-                        🔄 Refresh Dashboard
-                    </button>
-
-                </div>
-
-            </div>
+        </div>
 
 
-            <!-- RECENT BOOKINGS -->
+        <form id="parkingForm">
 
-            <div class="section">
-
-                <div class="section-header">
-
-                    <h2>
-                        Recent Bookings
-                    </h2>
-
-                    <span id="bookingMessage">
-                        Loading...
-                    </span>
-
-                </div>
+            <input
+                type="hidden"
+                id="parkingId"
+            >
 
 
-                <div
-                    id="recentBookings"
-                    class="booking-list"
+            <div class="form-group">
+
+                <label for="spotNumber">
+                    Spot Number
+                </label>
+
+                <input
+                    type="text"
+                    id="spotNumber"
+                    placeholder="e.g. A-101"
+                    required
                 >
 
-                    <div class="empty-box">
-                        <h3>
-                            Loading bookings...
-                        </h3>
-
-                        <p>
-                            Please wait.
-                        </p>
-                    </div>
-
-                </div>
-
             </div>
 
 
-            <!-- PARKING STATUS -->
+            <div class="form-group">
 
-            <div class="section">
+                <label for="parkingLocation">
+                    Location
+                </label>
 
-                <div class="section-header">
-
-                    <h2>
-                        Parking Overview
-                    </h2>
-
-                    <span id="parkingMessage">
-                        Loading...
-                    </span>
-
-                </div>
-
-
-                <div
-                    id="parkingOverview"
-                    class="parking-list"
+                <input
+                    type="text"
+                    id="parkingLocation"
+                    placeholder="e.g. Main Campus"
+                    required
                 >
 
-                    <div class="empty-box">
+            </div>
 
-                        <h3>
-                            Loading parking spots...
-                        </h3>
 
-                        <p>
-                            Please wait.
-                        </p>
+            <div class="form-group">
 
-                    </div>
+                <label for="parkingType">
+                    Parking Type
+                </label>
 
-                </div>
+                <select
+                    id="parkingType"
+                    required
+                >
+
+                    <option value="">
+                        Select Type
+                    </option>
+
+                    <option value="Car">
+                        Car
+                    </option>
+
+                    <option value="Bike">
+                        Bike
+                    </option>
+
+                    <option value="EV">
+                        EV
+                    </option>
+
+                    <option value="Disabled">
+                        Disabled
+                    </option>
+
+                </select>
 
             </div>
 
 
-        </section>
+            <div class="form-group">
 
-    </main>
+                <label for="pricePerHour">
+                    Price Per Hour
+                </label>
+
+                <input
+                    type="number"
+                    id="pricePerHour"
+                    min="0"
+                    step="0.01"
+                    placeholder="e.g. 100"
+                    required
+                >
+
+            </div>
 
 
-    <script src="admin-dashboard.js"></script>
+            <div class="form-group">
 
-</body>
+                <label for="parkingStatus">
+                    Status
+                </label>
 
-</html>
+                <select id="parkingStatus">
+
+                    <option value="Available">
+                        Available
+                    </option>
+
+                    <option value="Occupied">
+                        Occupied
+                    </option>
+
+                    <option value="Reserved">
+                        Reserved
+                    </option>
+
+                    <option value="Maintenance">
+                        Maintenance
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="availableTime">
+                    Available Time
+                </label>
+
+                <input
+                    type="text"
+                    id="availableTime"
+                    placeholder="e.g. 8 AM - 10 PM"
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="parkingInstructions">
+                    Parking Instructions
+                </label>
+
+                <textarea
+                    id="parkingInstructions"
+                    placeholder="Enter parking instructions"
+                    rows="3"
+                ></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="parkingDescription">
+                    Description
+                </label>
+
+                <textarea
+                    id="parkingDescription"
+                    placeholder="Enter parking description"
+                    rows="3"
+                ></textarea>
+
+            </div>
+
+
+            <button
+                type="submit"
+                id="saveParkingButton"
+                class="action-button"
+            >
+                Save Parking Spot
+            </button>
+
+
+            <p id="parkingFormMessage"></p>
+
+        </form>
+
+    </div>
+
+</div>
